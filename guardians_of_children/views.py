@@ -14,7 +14,6 @@ from .process import run
 class ViolenceDetector(APIView):
     def post(self, request):
         # print(request.data)
+        number, res = run()
 
-        number = run()
-
-        return HttpResponse(content=number)
+        return HttpResponse(content=res)
