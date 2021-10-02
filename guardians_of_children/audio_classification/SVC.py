@@ -26,10 +26,10 @@ def predict(preprocess_audio):
     prediction = clf_from_joblib.predict(preprocess_audio)
     if prediction[0] == 0.:
         print('non-fight')
-        return 'non-fight'
+        return 0
     elif prediction[0] == 1.:
         print('fight')
-        return 'fight'
+        return 1
 
 
 def classify():
