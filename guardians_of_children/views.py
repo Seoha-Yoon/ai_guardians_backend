@@ -26,4 +26,5 @@ class ViolenceDetector(APIView):
             return HttpResponse(content=str)
 
 def index(request):
-    return render(request,"index.html")
+    video = Video.objects.all()
+    return render(request,"index.html",{"video":video})
