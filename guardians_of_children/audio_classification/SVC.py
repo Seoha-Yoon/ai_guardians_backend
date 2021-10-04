@@ -33,5 +33,5 @@ def predict(preprocess_audio):
 
 
 def classify():
-    preprocess_audio = preprocess(os.path.join(os.getcwd(), 'guardians_of_children/audio_classification/fight_audio_214.wav'))
+    preprocess_audio = preprocess(os.path.join(os.getcwd(), 'guardians_of_children/audio_classification/reference_audio.wav'))
     return predict(preprocess_audio)

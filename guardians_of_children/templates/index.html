@@ -5,17 +5,16 @@
     <meta name=""viewport content="width=device-width,inital-scale=1, shrink-to-fit=no">
 
     <title>Hello, world!</title>
+    <link rel="shortcut icon" href="#">
 </head>
 <body>
     <h1>Hello, world!</h1>
     <hr>
     <div class="container">
-        {% for x in video %}
-        <h3 class="text-center mt-2 mb-2">{{x.caption}}</h3>
-        <video class="embed-responsive embed-responsive-16by9" controls="controls" >
-            <source src="{{x.video.url}}" type="video/mp4" />
-          </video>
-        {% endfor %}
+        {% load static %}
+        <video width="500" height="300" controls="controls" >
+            <source src="{% static 'video/reference.mp4' %}" type="video/mp4"/>
+        </video>
     </div>
 
 </body>

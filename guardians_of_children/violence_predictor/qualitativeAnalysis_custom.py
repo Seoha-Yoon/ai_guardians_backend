@@ -1001,7 +1001,7 @@ def Video2Npy(file_path, resize=320, crop_x_y=None, target_frames=None):
     return frames
 
 def Save2Npy(file_dir, crop_x_y=None, target_frames=None, frame_size=320):
-    file_path = os.path.join(os.getcwd(), glob.glob('guardians_of_children/violence_predictor/*.mp4')[0])
+    file_path = os.path.join(os.getcwd(), glob.glob('guardians_of_children/static/video/*.mp4')[0])
     # file_path = os.path.join(os.getcwd(), glob.glob('*.mp4')[0])
     # Load and preprocess video
     data = Video2Npy(file_path=file_path, resize=frame_size,
@@ -2472,5 +2472,5 @@ def calculate():
     if abuse_perc >= 0.75 :
         print(abuse_perc, r_frame.shape)
         # cv2.imwrite("random_frame.jpg", r_frame)
-        return abuse_perc, r_frame
+        return abuse_perc
     return abuse_perc
