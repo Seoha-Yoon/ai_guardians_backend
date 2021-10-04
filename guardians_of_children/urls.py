@@ -1,6 +1,8 @@
 from django.urls import path
+from . import views
 from .views import ViolenceDetector
 
 urlpatterns=[
-    path("video", ViolenceDetector.as_view())
+    path("", views.index),
+    path("violence",ViolenceDetector.as_view()),
 ]

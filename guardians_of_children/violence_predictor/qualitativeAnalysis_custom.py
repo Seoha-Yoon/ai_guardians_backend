@@ -1,3 +1,5 @@
+import glob
+
 from tensorflow.keras.utils import Sequence
 from tensorflow.keras.preprocessing.image import apply_affine_transform, apply_brightness_shift
 import os
@@ -999,9 +1001,8 @@ def Video2Npy(file_path, resize=320, crop_x_y=None, target_frames=None):
     return frames
 
 def Save2Npy(file_dir, crop_x_y=None, target_frames=None, frame_size=320):
-    # List the files
-
-    file_path = os.path.join(os.getcwd(), 'guardians_of_children/violence_predictor/ai_sh_224.mp4')
+    file_path = os.path.join(os.getcwd(), glob.glob('guardians_of_children/violence_predictor/*.mp4')[0])
+    # file_path = os.path.join(os.getcwd(), glob.glob('*.mp4')[0])
     # Load and preprocess video
     data = Video2Npy(file_path=file_path, resize=frame_size,
                          crop_x_y=crop_x_y, target_frames=target_frames)
@@ -1010,6 +1011,7 @@ def Save2Npy(file_dir, crop_x_y=None, target_frames=None, frame_size=320):
                                    frame_size, frame_size, 3))
     r_frame = data[np.random.randint(data.shape[0])]
     np.save(os.path.join(os.getcwd(),"guardians_of_children/violence_predictor/processed.npy"), np.uint8(data))
+    # np.save(os.path.join(os.getcwd(),"processed.npy"), np.uint8(data))
     return r_frame
 
 def convert_dataset_to_npy(src, crop_x_y=None, target_frames=None, frame_size=320):
@@ -2452,7 +2454,7 @@ def qualitative():
                                 mode = mode)
 
     model =  getProposedModelC(size=224, seq_len=32, frame_diff_interval = 1, mode="both", lstm_type=lstm_type)
-    model.load_weights(os.path.join(os.getcwd(),'guardians_of_children/violence_predictor/ckpt_all/rwf2000_currentModel')).expect_partial()
+    model.load_weights(os.path.join(os.getcwd(),'guardians_of_children/violence_predictor/ckpt_all/rwf2000_best_val_acc_Model')).expect_partial()
     model.trainable = False
     abuse_perc = evaluate(model, test_generator)
     return abuse_perc, r_frame

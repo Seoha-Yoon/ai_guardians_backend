@@ -2,16 +2,11 @@ import base64
 import os
 import sys
 
-from django.http import HttpResponse
 from django.shortcuts import render
-
-# Create your views here.
-from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from guardians_of_children.serializers import DataSerializer
 from django.http import HttpResponse
+
+from .models import Video
 from .process import run
 
 sys.path.append(os.getcwd())
@@ -28,10 +23,13 @@ class ViolenceDetector(APIView):
 
     def post(self, request):
         # print(request.data)
-
         out_dir = self.base_dir + "/media/frame.jpg"
         number, res = run(out_dir)
 
-        if(number>0.75 and res==1):
+        if(number>0.5 and res==1):
             img = convert2base64(out_dir)
             return HttpResponse(content=img)
+
+def index(request):
+    video = Video.objects.all()
+    return render(request,"index.html",{"video":video})
